@@ -19,7 +19,7 @@ RUN apk add --no-cache openjdk11-jre && \
 # Install terminal UIs
 
 # pgcli - TUI for PostgreSQL
-RUN pip install --upgrade pip pgcli
+# RUN pip install --upgrade pip pgcli
 
 # redli - TUI for Redis, requires additional libc compatibility for Alpine
 RUN apk add --no-cache libbsd && \
@@ -34,10 +34,10 @@ RUN curl -Lo /usr/local/bin/kaf https://github.com/birdayz/kaf/releases/download
     chmod +x /usr/local/bin/kaf
 
 # # fzf - for fuzzy search in general terminal use, enhances navigation in any TUI
-RUN apk add --no-cache fzf
+# RUN apk add --no-cache fzf
 
 # # ncdu - for checking disk usage in the container, useful for database size monitoring
-RUN apk add --no-cache ncdu
+# RUN apk add --no-cache ncdu
 
 # # Cleanup to reduce image size
 RUN rm -rf /var/cache/apk/*
@@ -48,7 +48,7 @@ SHELL ["/bin/bash", "-c"]
 # # Optional: Add entrypoint script if needed
 # # COPY entrypoint.sh /entrypoint.sh
 # # RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/bin/bash"]
+# ENTRYPOINT ["/bin/bash"]
 #
 # # Expose any necessary ports here if required by sidecar functionality
 EXPOSE 8080
