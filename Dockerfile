@@ -4,22 +4,29 @@ FROM alpine:latest
 ENV LANG=C.UTF-8
 ENV LC_ALL=C.UTF-8
 
+# Additional packages that make it easier to work in the terminal
+# bat - for syntax highlighting in the terminal
+# fzf - for fuzzy search in general terminal use, enhances navigation in any TUI
+# ncdu - for disk usage analysis
 RUN apk update && \
-    apk add --no-cache bash zsh curl vim nano postgresql-client redis kafkacat jq python3 py3-pip openjdk11-jre openjdk11-jre kubectl aws-cli && \
+    apk add --no-cache bash zsh curl vim nano postgresql-client redis kafkacat jq curl python3 py3-pip openjdk11-jre openjdk11-jre kubectl go aws-cli fzf ncdu bat && \
     rm -rf /var/cache/apk/*
 
 # things not installed: nats clickhouse-client
 
-# Install Elasticsearch client
-RUN apk add --no-cache openjdk11-jre && \
-    curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.10.2-linux-x86_64.tar.gz && \
-    tar -xzf elasticsearch-7.10.2-linux-x86_64.tar.gz && \
-    rm elasticsearch-7.10.2-linux-x86_64.tar.gz
-
 # Install terminal UIs
 
+# Setup a new virtualenv for python packages
+# and then install packages that we want to install
+# in this virtualenv
+RUN python3 -m venv /root/venv && \
+    source /root/venv/bin/activate && \
+    pip install --upgrade pip && \
+    pip install --upgrade pgcli httpie
+
 # pgcli - TUI for PostgreSQL
-# RUN pip install --upgrade pip pgcli
+# RUN pip install --upgrade pip
+# RUN pip install --upgrade pgcli
 
 # redli - TUI for Redis, requires additional libc compatibility for Alpine
 RUN apk add --no-cache libbsd && \
@@ -29,31 +36,20 @@ RUN apk add --no-cache libbsd && \
 # Setup VIM
 COPY vim/vimrc /root/.vimrc
 
-# # Install kaf - A rich CLI for Kafka
-RUN curl -Lo /usr/local/bin/kaf https://github.com/birdayz/kaf/releases/download/v0.2.5/kaf_linux_amd64 && \
-    chmod +x /usr/local/bin/kaf
+# Install kaf - A rich CLI for Kafka
+# RUN curl -Lo /usr/local/bin/kaf https://github.com/birdayz/kaf/releases/download/v0.2.5/kaf_linux_amd64 && \
+#     chmod +x /usr/local/bin/kaf
+RUN curl https://raw.githubusercontent.com/birdayz/kaf/master/godownloader.sh | BINDIR=$HOME/bin bash
 
-# # fzf - for fuzzy search in general terminal use, enhances navigation in any TUI
-# RUN apk add --no-cache fzf
 
-# # ncdu - for checking disk usage in the container, useful for database size monitoring
-# RUN apk add --no-cache ncdu
 
 # # Cleanup to reduce image size
 RUN rm -rf /var/cache/apk/*
 
-# Set default shell
-SHELL ["/bin/bash", "-c"]
+# Setup ENV variables
+ENV PATH="/root/venv/bin:${PATH}"
 
-# # Optional: Add entrypoint script if needed
-# # COPY entrypoint.sh /entrypoint.sh
-# # RUN chmod +x /entrypoint.sh
-# ENTRYPOINT ["/bin/bash"]
-#
-# # Expose any necessary ports here if required by sidecar functionality
-EXPOSE 8080
-#
-# # Add a health check to ensure the sidecar is responsive
-# HEALTHCHECK --interval=30s --timeout=5s \
-#     CMD curl -f http://localhost:8080/health || exit 1
-#
+WORKDIR /root
+
+# Set default shell
+SHELL ["/bin/zsh", "-c"]
