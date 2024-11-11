@@ -34,9 +34,10 @@ jobs:
             ${{ runner.os }}-buildx-
 
       - name: Build and Push Docker Image
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v6
         with:
           context: .
+          platforms: linux/amd64,linux/arm64,linux/arm64/v8
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/sidecar:latest
           cache-from: type=local,src=/tmp/.buildx-cache
