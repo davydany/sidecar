@@ -24,9 +24,9 @@ RUN python3 -m venv /root/venv && \
     pip install --upgrade pip && \
     pip install --upgrade pgcli httpie
 
-# pgcli - TUI for PostgreSQL
-# RUN pip install --upgrade pip
-# RUN pip install --upgrade pgcli
+# Install kaf - A rich CLI for Kafka
+# installed from source to get the latest version
+RUN go install github.com/birdayz/kaf/cmd/kaf@latest
 
 # redli - TUI for Redis, requires additional libc compatibility for Alpine
 RUN apk add --no-cache libbsd && \
@@ -36,18 +36,11 @@ RUN apk add --no-cache libbsd && \
 # Setup VIM
 COPY vim/vimrc /root/.vimrc
 
-# Install kaf - A rich CLI for Kafka
-# RUN curl -Lo /usr/local/bin/kaf https://github.com/birdayz/kaf/releases/download/v0.2.5/kaf_linux_amd64 && \
-#     chmod +x /usr/local/bin/kaf
-RUN curl https://raw.githubusercontent.com/birdayz/kaf/master/godownloader.sh | BINDIR=$HOME/bin bash
-
-
-
 # # Cleanup to reduce image size
 RUN rm -rf /var/cache/apk/*
 
 # Setup ENV variables
-ENV PATH="/root/venv/bin:${PATH}"
+ENV PATH="/root/venv/bin:/root/go/bin:${PATH}"
 
 WORKDIR /root
 

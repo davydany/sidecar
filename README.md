@@ -24,7 +24,7 @@ kubectl run -it --rm --image=davydany/sidecar sidecar -- bash
 * PostgreSQL CLI (pgcli)
   - Pgcli is a command line interface for Postgres with auto-completion and syntax highlighting. (https://www.pgcli.com/)
 * Official Redis Client (redis-cli)
-* Official Elasticsearch Client (elasticsearch)
+* Official Elasticsearch Client (curl - 😬)
 * Kafkacat (kafkacat)
 
 ### Supported Languages:
@@ -46,7 +46,7 @@ kubectl run -it --rm --image=davydany/sidecar sidecar -- bash
 * kubectl (`kubectl` - https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * awscli (`aws` - https://aws.amazon.com/cli/)
 * httpie (`http` or `https` - https://httpie.io/docs/cli/examples)
-* kaf ()
+* kaf (`kaf` - https://github.com/birdayz/kaf)
 
 ## Build Locally
 
