@@ -4,6 +4,20 @@ A sidecar container for debugging and troubleshooting in Kubernetes.
 
 **Website:** https://github.com/davydany/sidecar
 
+## Usage
+
+**Docker:**
+
+```bash
+docker run -it --rm davydany/sidecar bash
+```
+
+**Kubernetes:**
+
+```bash
+kubectl run -it --rm --image=davydany/sidecar sidecar -- bash
+```
+
 ## What's in the sidecar?
 ### Supported Clients:
 * Official PostgreSQL Client (psql)
