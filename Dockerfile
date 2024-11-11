@@ -9,7 +9,7 @@ ENV LC_ALL=C.UTF-8
 # fzf - for fuzzy search in general terminal use, enhances navigation in any TUI
 # ncdu - for disk usage analysis
 RUN apk update && \
-    apk add --no-cache bash zsh curl vim nano postgresql-client redis kafkacat jq curl python3 py3-pip openjdk11-jre openjdk11-jre kubectl go aws-cli fzf ncdu bat openssl openssh && \
+    apk add --no-cache bash zsh curl vim nano postgresql-client redis kafkacat jq curl python3 py3-pip openjdk11-jre openjdk11-jre kubectl go aws-cli fzf ncdu bat openssl openssh bind git && \
     rm -rf /var/cache/apk/*
 
 # things not installed: nats clickhouse-client
@@ -36,11 +36,14 @@ RUN apk add --no-cache libbsd && \
 # Setup VIM
 COPY vim/vimrc /root/.vimrc
 
-# # Cleanup to reduce image size
+# Cleanup to reduce image size
 RUN rm -rf /var/cache/apk/*
 
+# Install kubectl-plugins
+RUN git clone https://github.com/luksa/kubectl-plugins /root/kubectl-plugins
+
 # Setup ENV variables
-ENV PATH="/root/venv/bin:/root/go/bin:${PATH}"
+ENV PATH="/root/venv/bin:/root/go/bin:/root/kubectl-plugins:${PATH}"
 
 WORKDIR /root
 

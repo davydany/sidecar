@@ -45,8 +45,32 @@ kubectl run -it --rm --image=davydany/sidecar sidecar -- bash
 * jq (`jq` - https://stedolan.github.io/jq/)
 * kubectl (`kubectl` - https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * awscli (`aws` - https://aws.amazon.com/cli/)
-  * httpie (`http` or `https` - https://httpie.io/docs/cli/examples)
+* httpie (`http` or `https` - https://httpie.io/docs/cli/examples)
 * kaf (`kaf` - https://github.com/birdayz/kaf)
+* openssl (`openssl` - https://www.openssl.org/)
+* openssh (`ssh` - https://www.openssh.com/)
+* bind (`bind` - https://www.isc.org/bind/)
+  - `arpaname`
+  - `ddns-confgen`
+  - `delv`
+  - `dig`
+  - `dnstap-read`
+  - `host`
+  - `mdig`
+  - `named-checkzone`
+  - `named-compilezone`
+  - `named-journalprint`
+  - `named-rrchecker`
+  - `nslookup`
+  - `nsupdate`
+  - `rndc-confgen`
+  - `tsig-keygen`
+* `kubectl-plugins` (https://github.com/luksa/kubectl-plugins/tree/master)
+  - `kubectl-force-delete`
+  - `kubectl-really-delete-all`
+  - `kubectl-really-get-all`
+  - `kubectl-ssh`
+
 
 ## Build Locally
 
