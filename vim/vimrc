@@ -1,3 +1,7 @@
+" -------------------------
+" David's VIM configuration
+" -------------------------
+
 " Line numbers
 set number
 
