@@ -26,7 +26,8 @@ RUN apk add --no-cache libbsd && \
     curl -Lo /usr/local/bin/redli https://github.com/IBM-Cloud/redli/releases/download/v0.5.0/redli-linux-amd64 && \
     chmod +x /usr/local/bin/redli
 
-#
+# Setup VIM
+COPY vim/vimrc /root/.vimrc
 
 # # Install kaf - A rich CLI for Kafka
 RUN curl -Lo /usr/local/bin/kaf https://github.com/birdayz/kaf/releases/download/v0.2.5/kaf_linux_amd64 && \
