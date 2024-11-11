@@ -1,0 +1,71 @@
+" Line numbers
+set number
+
+" Enable syntax highlighting
+syntax on
+
+" Enable filetype detection
+filetype plugin indent on
+
+" Set tabs to 4 spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+" Better search experience
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+
+" Line wrapping and scrolling
+set wrap
+set scrolloff=8
+set sidescrolloff=8
+
+" Display matching brackets
+set showmatch
+
+" Persistent undo across sessions
+set undofile
+
+" Enable mouse support
+set mouse=a
+
+" Enable clipboard integration (yank/paste with system clipboard)
+set clipboard=unnamedplus
+
+" Show command in the bottom bar
+set showcmd
+
+" Show partial commands in status line
+set showmode
+
+" Auto-complete options
+set wildmenu
+set wildmode=longest:full,full
+" Set status line
+set laststatus=2
+
+" Enable 24-bit RGB color in the TUI
+set termguicolors
+
+" Always show sign column
+set signcolumn=yes
+
+" Relative line numbers
+set relativenumber
+" Map leader key to space
+let mapleader=" "
+
+" Save with Ctrl+S
+nnoremap <C-s> :w<CR>
+
+" Map Esc to jj (for convenience)
+inoremap jj <Esc>
+
+" Better window navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
