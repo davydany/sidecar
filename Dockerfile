@@ -9,7 +9,7 @@ ENV LC_ALL=C.UTF-8
 # fzf - for fuzzy search in general terminal use, enhances navigation in any TUI
 # ncdu - for disk usage analysis
 RUN apk update && \
-    apk add --no-cache bash zsh curl vim nano postgresql-client redis kafkacat jq curl python3 py3-pip openjdk11-jre openjdk11-jre kubectl go aws-cli fzf ncdu bat && \
+    apk add --no-cache bash zsh curl vim nano postgresql-client redis kafkacat jq curl python3 py3-pip openjdk11-jre openjdk11-jre kubectl go aws-cli fzf ncdu bat openssl openssh && \
     rm -rf /var/cache/apk/*
 
 # things not installed: nats clickhouse-client
